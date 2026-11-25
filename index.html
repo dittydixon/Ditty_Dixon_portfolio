@@ -1,0 +1,1055 @@
+<title>Ditty Dixon | Senior UI/UX Designer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap">
+<style>
+  /* Layout: single-column gallery. Top nav, headline, cover mosaic, then project rows; case studies open in place. */
+  :root {
+    --bg: #f4f4f3; --card: #ebebe9; --fg: #161a1b; --muted: #7a8486; --line: #dcdedd;
+    --accent: #1f6e70; --accent-soft: #e0eded;
+    --font-text: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-display: "Instrument Sans", "Inter", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101415; --card: #1a2022; --fg: #e8eded; --muted: #8b9799; --line: #263032;
+      --accent: #5fb7b9; --accent-soft: #17292b; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101415; --card: #1a2022; --fg: #e8eded; --muted: #8b9799; --line: #263032;
+    --accent: #5fb7b9; --accent-soft: #17292b; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-text); font-size: 16px; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 24px; font-size: 15px; position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); z-index: 5; }
+  nav .l, nav .r { display: flex; align-items: center; gap: 22px; }
+  nav a, nav button.link { text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; color: var(--fg); }
+  nav a:hover, nav button.link:hover { color: var(--accent); }
+  .toggle { width: 38px; height: 22px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); position: relative; cursor: pointer; padding: 0; }
+  .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--fg); transition: transform .2s; }
+  :root[data-theme="dark"] .toggle::after { transform: translateX(16px); }
+  .pill { border: 1px solid var(--fg); border-radius: 999px; padding: 6px 16px; text-decoration: none; background: none; cursor: pointer; font-size: 14px; display: inline-block; }
+  .pill:hover { background: var(--fg); color: var(--bg); }
+
+  .hero { padding-block: 72px 36px; }
+  .hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 5.5vw, 3.4rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 16px; max-width: 18ch; text-wrap: balance; }
+  .hero p { margin: 0; color: var(--muted); font-size: 1.15rem; max-width: 46ch; }
+  .hero .meta { margin-top: 24px; font-size: 14px; color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap; }
+
+  .mosaic { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding-bottom: 72px; }
+  .mosaic button { border: 0; padding: 0; background: var(--card); border-radius: 14px; overflow: hidden; cursor: pointer; aspect-ratio: 16/10; grid-column: span 2; }
+  .mosaic img, .proj .shot img, .cs .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+  .mosaic button:hover img { transform: scale(1.03); }
+
+  .proj { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 56px; padding-block: 56px; border-top: 1px solid var(--line); align-items: center; }
+  .proj h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 0; letter-spacing: -.01em; }
+  .proj .sub { color: var(--muted); margin: 2px 0 14px; }
+  .proj p { margin: 0 0 22px; max-width: 46ch; }
+  dl.facts { display: grid; grid-template-columns: 70px 1fr; gap: 6px 14px; margin: 0 0 24px; font-size: 15px; }
+  dl.facts dt { color: var(--muted); } dl.facts dd { margin: 0; }
+  .proj .shot { background: var(--card); border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; border: 0; padding: 0; cursor: pointer; width: 100%; }
+  .proj:hover .shot img { transform: scale(1.02); }
+
+  .sec-t { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin: 0 0 24px; }
+  .more, .about, .exp { padding-block: 56px; border-top: 1px solid var(--line); }
+  .more ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+  .more li b { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; }
+  .more li span.r { color: var(--accent); font-size: 14px; margin-left: 10px; }
+  .more li p { margin: 2px 0 0; color: var(--muted); max-width: 62ch; }
+  .about p { max-width: 62ch; margin: 0 0 14px; font-size: 1.05rem; }
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+  .row { display: flex; justify-content: space-between; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+  .row small { color: var(--muted); display: block; font-size: 14px; } .row time { color: var(--muted); font-size: 14px; white-space: nowrap; }
+  .sk div { margin-bottom: 16px; } .sk dt { font-size: 14px; color: var(--muted); } .sk dd { margin: 0; } .sk { margin: 0; }
+  .contact { padding-block: 56px 72px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; align-items: center; }
+  .contact h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0; letter-spacing: -.01em; }
+
+  /* case study */
+  .cs { padding-block: 24px 80px; max-width: 880px; margin: 0 auto; }
+  .back { background: none; border: 0; cursor: pointer; color: var(--muted); padding: 0; margin-bottom: 28px; font-size: 15px; }
+  .back:hover { color: var(--accent); }
+  .cs h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 10px; text-wrap: balance; }
+  .cs .lead { color: var(--muted); font-size: 1.1rem; margin: 0 0 28px; }
+  .cs .cover { background: var(--card); border-radius: 16px; overflow: hidden; margin-block: 32px 12px; aspect-ratio: 1068/695; }
+  .cs h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; margin: 48px 0 12px; letter-spacing: -.01em; }
+  .cs h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; margin: 30px 0 8px; }
+  .cs h4 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin: 18px 0 6px; font-weight: 600; }
+  .cs p { margin: 0 0 14px; } .cs ul { margin: 0 0 14px; padding-left: 20px; } .cs li { margin-bottom: 6px; }
+
+  /* lightbox */
+  #study img { cursor: zoom-in; }
+  #lb { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; flex-direction: column; background: rgba(8,10,16,.97); padding: 56px 16px 20px; }
+  #lb.on { display: flex; }
+  #lb .stage { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; overflow: auto; }
+  #lb img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 8px; cursor: zoom-in; background: #fff; }
+  #lb.zoom .stage { align-items: flex-start; justify-content: flex-start; }
+  #lb.zoom img { max-width: none; max-height: none; width: 200%; cursor: zoom-out; }
+  #lb .cap { color: #cfd3dc; font-size: 13px; margin-top: 10px; text-align: center; min-height: 18px; }
+  #lb button { position: absolute; border: 0; background: rgba(255,255,255,.14); color: #fff; width: 42px; height: 42px; border-radius: 50%; font-size: 20px; cursor: pointer; line-height: 1; }
+  #lb button:hover, #lb button:focus-visible { background: rgba(255,255,255,.3); outline: 2px solid #fff; }
+  #lb .x { top: 12px; right: 14px; } #lb .pv { left: 14px; top: 50%; } #lb .nx { right: 14px; top: 50%; }
+  #lb .ct { position: absolute; top: 22px; left: 18px; color: #cfd3dc; font-size: 13px; }
+  @media (max-width: 600px) { #lb .pv, #lb .nx { top: auto; bottom: 14px; } #lb { padding-bottom: 70px; } }
+  .cs .fig { margin: 22px 0 8px; } .cs .fig img { width: 100%; height: auto; display: block; border-radius: 12px; background: var(--card); } .cs .fig figcaption { color: var(--muted); font-size: 13px; margin-top: 8px; }
+
+  /* SC Signal case study components */
+  .cs .sc { --b:#2e7644; --b2:#0d6c32; --bsoft:#e3efe7; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cs .sc { --b:#6fbf8a; --b2:#7fd09a; --bsoft:#16281d; } }
+  :root[data-theme="dark"] .cs .sc { --b:#6fbf8a; --b2:#7fd09a; --bsoft:#16281d; }
+  .sc .glance { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden; margin:8px 0 6px; }
+  .sc .glance div { background:var(--bg); padding:16px 18px; }
+  .sc .glance small { display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+  .sc .glance b { font-family:var(--font-display); font-weight:600; font-size:1.05rem; }
+  .sc .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:14px 0 8px; }
+  .sc .card { background:var(--card); border-radius:14px; padding:18px 20px; }
+  .sc .card .n { font-family:var(--font-display); font-weight:600; font-size:13px; color:var(--b); letter-spacing:.06em; }
+  .sc .card h5 { font-family:var(--font-display); font-weight:600; font-size:1.02rem; margin:6px 0 6px; }
+  .sc .card p { margin:0; font-size:.94rem; color:var(--muted); }
+  .sc .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px; }
+  .sc .chip { border:1px solid var(--line); border-radius:999px; padding:5px 14px; font-size:14px; }
+  .sc .flow { display:flex; flex-wrap:wrap; gap:10px; align-items:stretch; margin:16px 0 8px; counter-reset:f; }
+  .sc .flow div { flex:1 1 130px; background:var(--bsoft); border-radius:14px; padding:14px 16px; counter-increment:f; }
+  .sc .flow div::before { content:counter(f); display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--b); color:#fff; font-size:12px; font-weight:700; margin-bottom:8px; }
+  .sc .flow b { display:block; font-family:var(--font-display); font-weight:600; font-size:.98rem; }
+  .sc .flow span { font-size:.86rem; color:var(--muted); }
+  .sc .sw { display:grid; grid-template-columns:repeat(auto-fit,minmax(104px,1fr)); gap:10px; margin:14px 0 8px; }
+  .sc .sw div { border-radius:12px; overflow:hidden; border:1px solid var(--line); background:var(--bg); }
+  .sc .sw i { display:block; height:56px; }
+  .sc .sw span { display:block; padding:8px 10px 10px; font-size:12px; line-height:1.35; color:var(--muted); }
+  .sc .sw b { display:block; color:var(--fg); font-size:13px; font-weight:600; }
+  .sc .states { display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 4px; }
+  .sc .st { display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; color:#fff; font-weight:700; font-size:14px; }
+  .sc .st::before { content:""; width:9px; height:9px; border-radius:50%; background:#fff; opacity:.9; }
+  .cs .sc-median { --b:#3550b8; --bsoft:#e6e9f7; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cs .sc-median { --b:#8fa4f0; --bsoft:#1a2142; } }
+  :root[data-theme="dark"] .cs .sc-median { --b:#8fa4f0; --bsoft:#1a2142; }
+  .cs .sc-ent { --b:#4a3fb0; --bsoft:#e9e7f7; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cs .sc-ent { --b:#a79ff0; --bsoft:#1d1a42; } }
+  :root[data-theme="dark"] .cs .sc-ent { --b:#a79ff0; --bsoft:#1d1a42; }
+  .cs .sc-rane { --b:#2a6cb0; --bsoft:#e2edf7; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cs .sc-rane { --b:#78b4ec; --bsoft:#14253a; } }
+  :root[data-theme="dark"] .cs .sc-rane { --b:#78b4ec; --bsoft:#14253a; }
+  .cs .sc-fs { --b:#a8741e; --bsoft:#f6ecd9; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cs .sc-fs { --b:#e0b266; --bsoft:#33281a; } }
+  :root[data-theme="dark"] .cs .sc-fs { --b:#e0b266; --bsoft:#33281a; }
+  .cs .sc-aiq { --b:#6a2fc0; --bsoft:#eee6f9; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cs .sc-aiq { --b:#b99af0; --bsoft:#26193d; } }
+  :root[data-theme="dark"] .cs .sc-aiq { --b:#b99af0; --bsoft:#26193d; }
+  .sc > ul { list-style:none; padding:16px 20px; background:var(--bsoft); border-radius:14px; }
+  .sc > ul li { position:relative; padding-left:24px; } .sc > ul li::before { content:"✓"; position:absolute; left:0; color:var(--b); font-weight:700; }
+  .sc h4 { color:var(--b); }
+  .sc .pair { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin:14px 0 8px; }
+  .sc .pair > div { border-radius:14px; padding:20px 22px; }
+  .sc .pair small { font-size:11px; letter-spacing:.1em; font-weight:700; }
+  .sc .pair h5 { font-family:var(--font-display); font-size:1.1rem; font-weight:600; margin:6px 0; }
+  .sc .pair p { margin:0; font-size:.95rem; }
+  .sc .pair .before { background:var(--card); color:var(--muted); } .sc .pair .before h5 { color:var(--fg); }
+  .sc .pair .after { background:var(--bsoft); border:1px solid var(--b); } .sc .pair .after small { color:var(--b); }
+  .sc .stat { display:flex; align-items:center; gap:22px; flex-wrap:wrap; background:var(--bsoft); border:1px solid var(--b); border-radius:16px; padding:22px 26px; margin:8px 0 14px; }
+  .sc .stat b { font-family:var(--font-display); font-weight:600; font-size:clamp(3rem,9vw,4.6rem); line-height:1; color:var(--b); letter-spacing:-.03em; }
+  .sc .stat span { font-size:1.1rem; max-width:22ch; }
+  .sc .ba { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin:14px 0 8px; }
+  .sc .ba .bx { background:var(--card); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:8px; min-height:210px; }
+  .sc .ba .bx:last-child { background:var(--bsoft); border:1px solid var(--b); }
+  .sc .ba small { font-size:11px; letter-spacing:.1em; font-weight:700; color:var(--muted); } .sc .ba .bx:last-child small { color:var(--b); }
+  .sc .ba .tabs { display:flex; gap:4px; } .sc .ba .tabs i { font-style:normal; font-size:12px; padding:6px 10px; border-radius:8px 8px 0 0; background:var(--bg); color:var(--muted); } .sc .ba .tabs i.on { background:var(--b); color:#fff; }
+  .sc .ba .blk { background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:12px; font-size:13px; flex:1; display:grid; place-items:center; text-align:center; }
+  .sc .ba .blk.g { flex:none; padding:14px; } .sc .ba .row2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; flex:1; } .sc .ba .row2 .blk { padding:10px; }
+  .cs .note { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 40px; }
+  .cs .next { margin-top: 48px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    nav .l { gap: 16px; } nav .r .contactlink { display: none; }
+    .hero { padding-block: 40px 28px; }
+    .mosaic { grid-template-columns: repeat(2, 1fr); }
+    .mosaic button, .mosaic button:nth-child(n) { grid-column: span 1; aspect-ratio: 16/10; }
+    .proj { grid-template-columns: minmax(0, 1fr); padding-block: 40px; gap: 20px; } .proj .shot { order: -1; }
+    .cols { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Primary">
+    <div class="l">
+      <a href="#/" data-go="top"><strong>Ditty Dixon</strong></a>
+      <a href="#/" data-go="work">Work</a>
+      <a href="#/" data-go="about">About</a>
+    </div>
+    <div class="r">
+      <button class="toggle" id="theme" type="button" aria-label="Toggle dark mode"></button>
+      <a class="contactlink" href="#/" data-go="contact">Contact</a>
+    </div>
+  </nav>
+
+  <main id="home">
+    <header class="hero" id="top">
+      <h1>Senior UI/UX designer making complex workflows simple.</h1>
+      <p>Seven years designing enterprise web apps, SaaS and mobile products, from factory-floor tablets to AI assistants.</p>
+      <div class="meta"><span>Trivandrum, India</span><span>Senior UI/UX Designer</span><span>Open to work</span></div>
+    </header>
+    <div class="mosaic" id="mosaic" aria-label="Selected projects"></div>
+    <div id="work"></div>
+    <section class="more" aria-labelledby="more-h">
+      <h2 class="sec-t" id="more-h">More work</h2>
+      <ul>
+        <li><b>Staffing Projection Tool</b><span class="r">Lead UX Designer</span><p>An Excel-style web app that lets management see the availability and shift timings of doctors working across different hospitals, in the spreadsheet layout they already knew.</p></li>
+        <li><b>Law Firm Application</b><span class="r">UI Developer</span><p>Developed UI in React.js, fixing interface and usability issues alongside developers.</p></li>
+      </ul>
+    </section>
+    <section class="about" id="about" aria-labelledby="about-h">
+      <h2 class="sec-t" id="about-h">About</h2>
+      <p>I take products from user research and Figma prototypes to working UI. My strengths are complex workflows, design systems and accessibility.</p>
+      <p>Most of my work replaces spreadsheets, paper and scattered tools with one clear interface. I use AI tools throughout, from research synthesis to rapid prototypes, and I work from written specs with developers.</p>
+      <div class="cols" style="margin-top:40px">
+        <div>
+          <h3 class="sec-t">Experience</h3>
+          <div class="row"><div>Senior UI/UX Designer<small>InApp Information Technologies, Trivandrum</small></div><time>2022 to now</time></div>
+          <div class="row"><div>UI/UX Designer<small>Tekfriday Processing Solution, Hyderabad</small></div><time>2021 to 2022</time></div>
+          <div class="row"><div>Associate Software Engineer (UI)<small>Goalsr India, Bangalore</small></div><time>2018</time></div>
+          <div class="row"><div>Graphic Designer / UI Designer<small>Ironss Technologies, Kollam</small></div><time>2016 to 2018</time></div>
+        </div>
+        <div>
+          <h3 class="sec-t">Skills</h3>
+          <dl class="sk">
+            <div><dt>Design</dt><dd>User research, journeys, information architecture, wireframing, prototyping, usability testing, design systems, accessibility (WCAG)</dd></div>
+            <div><dt>Build</dt><dd>React.js, HTML5, CSS3, SCSS, Bootstrap, Tailwind CSS</dd></div>
+            <div><dt>Tools</dt><dd>Figma, Figma Make, Adobe XD, Illustrator, Photoshop, Canva</dd></div>
+            <div><dt>AI</dt><dd>Figma Make, Lovable, Midjourney, Adobe Firefly, Perplexity, Claude, ChatGPT, NotebookLM</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+    <section class="contact" id="contact">
+      <h2>Open to UI/UX design and UI development roles.</h2>
+      <div><code id="email" style="font-family:inherit;user-select:all">dittyprathyusham02@gmail.com</code> <button class="pill" id="copy" type="button" style="margin-left:10px">Copy</button></div>
+    </section>
+  </main>
+
+  <main id="study" class="cs" hidden></main>
+</div>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Enlarged image" hidden><span class="ct"></span><button class="x" type="button" aria-label="Close">✕</button><button class="pv" type="button" aria-label="Previous image">‹</button><button class="nx" type="button" aria-label="Next image">›</button><div class="stage"><img alt=""></div><div class="cap"></div></div>
+<script>
+(function () {
+  var P = [
+  {
+    "id": "median",
+    "img": "img/ma-cover.jpg",
+    "title": "Median America",
+    "full": "Median America: Manufacturing Switchgear Application",
+    "sub": "Replacing paper switchgear records with a digital production platform",
+    "role": "Lead UX Designer",
+    "scope": "UX, UI, Workflows",
+    "plat": "Web and tablet",
+    "blurb": "Replaced paper-based switchgear assembly, testing and inspection records with digital web and tablet workflows, giving supervisors live shop-floor visibility and traceability.",
+    "body": [
+      {
+        "h": "Project overview",
+        "p": [
+          "Median America Digital Manufacturing Platform is a web and tablet application that helps manufacturing operators, inspectors, and supervisors digitize assembly, testing, and inspection workflows for high-voltage switchgear production. The challenge was replacing a paper-based documentation process with a streamlined digital solution that improved traceability, reduced errors, and provided real-time visibility into production progress."
+        ],
+        "html": "<div class=\"glance\"><div><small>Platform</small><b>Web and tablet</b></div><div><small>Users</small><b>Operators, inspectors, supervisors</b></div><div><small>Role</small><b>Lead UX Designer</b></div><div><small>Industry</small><b>High-voltage switchgear</b></div></div><div class=\"pair\"><div class=\"before\"><small>BEFORE</small><h5>Paper forms</h5><p>Operators filled in paper by hand during assembly, testing and final inspection. The result was duplicate work, misplaced records and delays between departments.</p></div><div class=\"after\"><small>AFTER</small><h5>One guided digital flow</h5><p>Each production stage is completed in a single app. Information entered at one stage carries forward automatically.</p></div></div>"
+      },
+      {
+        "h": "My role",
+        "p": [
+          "I was the Lead UX Designer responsible for designing the user experience and interface for the web and tablet application. I worked closely with business stakeholders, developers, and domain experts to understand manufacturing workflows, create user flows, wireframes, and high-fidelity designs, and ensure the solution met both user and business requirements."
+        ],
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">OPERATORS</span><h5>Tablet app</h5><p>A simple, task-focused interface to complete assembly, testing and inspection on the shop floor.</p></div><div class=\"card\"><span class=\"n\">MANAGERS</span><h5>Web dashboard</h5><p>Production status, approval queues, quality trends, total man-hours and average cycle time by breaker type.</p></div></div>"
+      },
+      {
+        "h": "Key design decisions",
+        "subs": [
+          {
+            "h": "Decision 1: Digitizing the end-to-end production workflow",
+            "p": [
+              "The existing workflow relied on paper forms that operators manually filled out during assembly, testing, and final inspection. This caused duplicate work, misplaced records, and delays between departments.",
+              "I redesigned the workflow into a guided digital process that allowed users to complete each production stage within a single application. Information entered at one stage automatically carried forward, reducing repetitive data entry while ensuring consistent documentation throughout the production lifecycle."
+            ],
+            "k": "Why it mattered",
+            "ul": [
+              "Eliminated paper-based documentation",
+              "Reduced duplicate data entry",
+              "Improved traceability across departments",
+              "Created a consistent user experience from assembly to inspection"
+            ],
+            "img": "img/ma-d1.jpg",
+            "cap": "Before: paper checklists. After: guided digital stages with quality check points on tablet."
+          },
+          {
+            "h": "Decision 2: Simplifying workforce time tracking",
+            "p": [
+              "One of the key business challenges was the lack of visibility into how much time employees spent on each stage of the manufacturing process. Operators manually recorded their work, making it difficult to accurately measure labor hours, identify process inefficiencies, or compare productivity across different breaker types.",
+              "To address this, I designed a digital check-in and check-out workflow that allowed employees to start and end each assembly and testing task with a single action. The system automatically calculated the time spent on each process and associated it with the employee and the corresponding breaker type. This data was then surfaced in the web application through manager dashboards, providing insights into total man-hours and average man-hours by breaker type."
+            ],
+            "k": "Why it mattered",
+            "ul": [
+              "Automated employee work-hour tracking without manual calculations",
+              "Improved accuracy of labor time records for each production stage",
+              "Enabled managers to monitor Total Man Hours and Average Man Hours by Breaker Type",
+              "Helped identify production bottlenecks and opportunities to improve operational efficiency and resource planning"
+            ],
+            "img": "img/ma-d2.jpg",
+            "cap": "Tablet check-in and check-out for employee time logs, and the web man-hours dashboard."
+          },
+          {
+            "h": "Decision 3: Designing role-based experiences for operators and managers",
+            "p": [
+              "The manufacturing process involved two distinct user groups with different goals. Shop floor operators needed a simple, task-focused interface to quickly complete assembly, testing, and inspection activities, while managers required a comprehensive view of production progress, quality metrics, and workforce performance to make operational decisions.",
+              "Instead of designing a single interface for all users, I created role-specific experiences. The tablet application focused on helping operators efficiently execute production tasks with minimal distractions, while the web dashboard provided managers with real-time operational insights, including production status, approval queues, quality trends, total man-hours, and average cycle time by breaker type."
+            ],
+            "k": "Why it mattered",
+            "ul": [
+              "Delivered task-focused experiences tailored to each user role",
+              "Reduced cognitive load for operators by exposing only the information needed to complete production tasks",
+              "Enabled managers to monitor production progress, identify bottlenecks, and make data-driven decisions from a centralized dashboard",
+              "Improved visibility across the entire manufacturing lifecycle, from assembly to final inspection"
+            ],
+            "img": "img/ma-d3.jpg",
+            "cap": "Web dashboard for managers and tablet app for operators."
+          }
+        ]
+      },
+      {
+        "h": "Outcome",
+        "p": [
+          "The project successfully transformed a manual, paper-based manufacturing workflow into a digital production management platform that streamlined both production documentation and workforce tracking.",
+          "The solution enabled:"
+        ],
+        "ul": null,
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">01</span><p>End-to-end digitization of assembly, testing, and final inspection workflows</p></div><div class=\"card\"><span class=\"n\">02</span><p>Real-time visibility into production progress across the shop floor</p></div><div class=\"card\"><span class=\"n\">03</span><p>Digital check-in and check-out for production tasks, with automatic calculation of work duration</p></div><div class=\"card\"><span class=\"n\">04</span><p>Centralized storage of inspection data, measurements, photographs, and approvals</p></div><div class=\"card\"><span class=\"n\">05</span><p>Improved traceability and data accuracy by replacing manual documentation with standardized digital forms</p></div><div class=\"card\"><span class=\"n\">06</span><p>A scalable platform that supports manufacturing operations while providing supervisors with actionable production insights</p></div></div>"
+      },
+      {
+        "h": "Business and user outcomes",
+        "p": [
+          "Beyond digitizing the workflow, the platform changed how management runs the shop floor:"
+        ],
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">01</span><h5>Improved employee time tracking</h5><p>Management can accurately monitor employee working hours, with better visibility into productive and non-productive time, helping reduce unnecessary payroll expenses.</p></div><div class=\"card\"><span class=\"n\">02</span><h5>Better assembly progress monitoring</h5><p>Tracking the progress of individual assemblies is simpler, so managers can quickly see how much work is complete and which activities are pending.</p></div><div class=\"card\"><span class=\"n\">03</span><h5>Improved operational visibility</h5><p>A consolidated view of employee hours, assembly progress and work status makes overall operational performance easier to monitor.</p></div><div class=\"card\"><span class=\"n\">04</span><h5>Reduced manual tracking effort</h5><p>Monitoring working hours and assembly progress depends less on manual tracking and repetitive follow-ups.</p></div><div class=\"card\"><span class=\"n\">05</span><h5>More informed management decisions</h5><p>Operational data is easier to access and understand, supporting decisions on workforce allocation, productivity and project planning.</p></div><div class=\"card\"><span class=\"n\">06</span><h5>Improved resource utilisation</h5><p>Management can see how employee time and resources are used, creating opportunities to optimise workforce allocation and minimise idle time.</p></div><div class=\"card\"><span class=\"n\">07</span><h5>Increased process transparency</h5><p>Clear visibility into each assembly and employee activity helps managers identify delays and track work more effectively.</p></div></div>"
+      }
+    ],
+    "cls": "sc sc-median"
+  },
+  {
+    "id": "enterprise",
+    "img": "img/ent-cover.jpg",
+    "title": "Enterprise AI Assistant",
+    "full": "Enterprise AI Assistant for Construction Management",
+    "sub": "One conversational interface across ACC, Procore and SharePoint",
+    "role": "Lead UX Designer",
+    "scope": "UX, UI, Conversational design",
+    "plat": "Web, AI",
+    "blurb": "A natural-language interface that lets field teams find project information across Autodesk Construction Cloud, Procore and SharePoint in one place, without manual searching.",
+    "body": [
+      {
+        "h": "Project overview",
+        "p": [
+          "Enterprise AI Assistant is a web-based AI assistant that helps field superintendents and project teams retrieve project information from Autodesk Construction Cloud (ACC), Procore, and SharePoint using natural language. The challenge was eliminating the need for users to manually search across multiple disconnected platforms by providing a single, AI-powered interface for fast and accurate information retrieval."
+        ],
+        "html": "<div class=\"glance\"><div><small>Platform</small><b>Web, AI</b></div><div><small>Systems</small><b>ACC, Procore, SharePoint</b></div><div><small>Role</small><b>Lead UX Designer</b></div><div><small>Status</small><b>Proof of concept</b></div></div>"
+      },
+      {
+        "h": "Before the redesign",
+        "p": [
+          "Field teams checked Autodesk Construction Cloud, Procore and SharePoint one by one, each with its own search, to answer a single question."
+        ],
+        "img": "img/ent-before.jpg",
+        "cap": "Before: project information spread across separate tools, each searched by hand (illustrative recreation)."
+      },
+      {
+        "h": "After the redesign",
+        "p": [
+          "One assistant inside the project workspace answers in plain language, shows which system each result came from, and keeps past conversations a click away."
+        ],
+        "img": "img/ent-s4.jpg",
+        "cap": "After: one conversational interface across ACC, Procore and SharePoint, with history and sources."
+      },
+      {
+        "h": "My role",
+        "p": [
+          "I was the Lead UX Designer responsible for designing the conversational experience and user interface for the AI assistant. I collaborated with business stakeholders and technical teams to understand user workflows, simplify complex AI interactions, create low-fidelity wireframes and high-fidelity designs, and design a seamless experience for querying project information across multiple enterprise systems."
+        ]
+      },
+      {
+        "h": "Key design decisions",
+        "subs": [
+          {
+            "h": "Decision 1: Designing AI around user intent instead of data sources",
+            "p": [
+              "Field users often didn’t know whether project information was stored in Procore, Autodesk Construction Cloud (ACC), or SharePoint. Requiring users to choose a data source before searching added unnecessary complexity and slowed down decision-making.",
+              "I designed the AI assistant to accept natural language questions without requiring users to specify where the information was stored. The assistant orchestrates searches across multiple platforms and presents a single, consolidated response, allowing users to focus on their questions rather than the underlying systems."
+            ],
+            "k": "Why it mattered",
+            "ul": [
+              "Eliminated the need to navigate multiple applications",
+              "Reduced search time for critical project information",
+              "Simplified the experience for non-technical and non-licensed users",
+              "Created a unified search experience across enterprise platforms"
+            ],
+            "img": "img/ent-s2.jpg",
+            "cap": "One question, one consolidated answer, with no need to pick a data source first."
+          },
+          {
+            "h": "Decision 2: Reducing the blank-screen effect with guided conversations",
+            "p": [
+              "Users unfamiliar with AI assistants often hesitate because they don’t know what questions to ask. A blank chat interface can create uncertainty and slow adoption.",
+              "To encourage engagement, I designed the assistant with suggested prompts for common construction tasks, such as finding pending RFIs, checking task status, and locating project documents. This provided users with clear starting points while allowing them to ask custom questions using natural language."
+            ],
+            "k": "Why it mattered",
+            "ul": [
+              "Lowered the learning curve for first-time users",
+              "Increased confidence in interacting with the AI assistant",
+              "Encouraged faster adoption by demonstrating practical use cases",
+              "Reduced friction during the initial user experience"
+            ],
+            "img": "img/ent-s1.jpg",
+            "cap": "Suggested prompts give first-time users a starting point."
+          },
+          {
+            "h": "Decision 3: Building trust through transparent AI responses",
+            "p": [
+              "In construction projects, decisions rely on accurate and verifiable information. Users needed confidence that AI-generated answers were coming from trusted enterprise systems.",
+              "I designed response cards that clearly identified the source platform (Procore, ACC, or SharePoint), displayed relevant project details, and included metadata such as update timestamps. This provided transparency into where information originated and helped users quickly validate AI responses."
+            ],
+            "k": "Why it mattered",
+            "ul": [
+              "Increased user trust in AI-generated answers",
+              "Improved transparency by exposing data sources",
+              "Reduced uncertainty when making project decisions",
+              "Supported enterprise governance and accountability"
+            ],
+            "img": "img/ent-s4.jpg",
+            "cap": "Response cards show the source platform, status and last-updated time, with links back to the source."
+          },
+          {
+            "h": "Decision 4: Making conversations easy to resume",
+            "p": [
+              "Field users frequently return to previous discussions to revisit RFIs, task updates, or project documents. Starting every interaction from scratch would reduce efficiency and make it harder to reference earlier information.",
+              "I designed a conversation history panel that organizes previous interactions by date and topic, allowing users to quickly reopen past conversations without repeating the same questions. This made the assistant feel more like a productivity tool than a one-time search interface."
+            ],
+            "k": "Why it mattered",
+            "ul": [
+              "Enabled quick access to previous AI conversations",
+              "Reduced repetitive searches",
+              "Improved productivity for recurring project queries",
+              "Created a familiar chat experience for enterprise users"
+            ],
+            "img": "img/ent-s3.jpg",
+            "cap": "Conversation history grouped by date and topic."
+          }
+        ]
+      },
+      {
+        "h": "Outcome",
+        "p": [
+          "After the redesign, about 70% of employees use the assistant. It gave field teams one conversational way to reach construction project information across multiple enterprise platforms.",
+          "Key outcomes included:"
+        ],
+        "ul": [
+          "Unified project information from Autodesk Construction Cloud, Procore, and SharePoint into a single AI-powered interface",
+          "Simplified information retrieval through natural language interactions",
+          "Reduced dependency on manual searches across multiple applications",
+          "Improved accessibility for field teams without requiring knowledge of underlying data sources",
+          "Established a scalable UX foundation for future enterprise AI capabilities and multi-step reasoning workflows"
+        ],
+        "html": "<div class=\"stat\"><b>70%</b><span>of employees use the assistant after the redesign</span></div>"
+      }
+    ],
+    "note": "This project was developed as a Proof of Concept (PoC). Due to confidentiality, other business metrics cannot be disclosed.",
+    "cls": "sc sc-ent"
+  },
+  {
+    "id": "scvpn",
+    "img": "img/svc-cover.jpg",
+    "cls": "sc",
+    "title": "SC Signal VPN",
+    "full": "SC-Signals VPN Application",
+    "sub": "One tap from the map to a secure connection",
+    "role": "UI/UX Designer",
+    "scope": "Research, UX, UI, Prototyping",
+    "plat": "Mobile app",
+    "blurb": "A mobile-first app for connecting to WireGuard VPN servers, with simple server selection and connection flows that respect security and privacy needs.",
+    "body": [
+      {
+        "h": "Project overview",
+        "p": [
+          "SC Signal, a company specializing in secure telecommunication services, wanted to enhance its existing WireGuard VPN service with a mobile app for iOS and Android. The goal was an intuitive, seamless way for customers to connect to SC Signal’s VPN servers on the go, augmenting the current VPN application with a more user-friendly mobile experience."
+        ],
+        "html": "<div class=\"glance\"><div><small>Platform</small><b>iOS and Android</b></div><div><small>Protocol</small><b>WireGuard VPN</b></div><div><small>Role</small><b>UI/UX Designer</b></div><div><small>Scope</small><b>Research to prototype</b></div><div><small>Tools</small><b>Figma</b></div></div>"
+      },
+      {
+        "h": "Problem statement",
+        "p": [
+          "SC Signal’s customers use the WireGuard protocol to connect to VPN servers for secure, private internet access. The challenge was to design a mobile application that provides:"
+        ],
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">01</span><h5>One app, two platforms</h5><p>Seamless VPN access on both iOS and Android.</p></div><div class=\"card\"><span class=\"n\">02</span><h5>Fast server choice</h5><p>Easy server selection and connection management.</p></div><div class=\"card\"><span class=\"n\">03</span><h5>Privacy by default</h5><p>Secure authentication and data privacy.</p></div><div class=\"card\"><span class=\"n\">04</span><h5>For everyone</h5><p>A clear interface for technical and non-technical users.</p></div></div>"
+      },
+      {
+        "h": "Process",
+        "subs": [
+          {
+            "h": "Research",
+            "p": [
+              "I started with user research and competitive analysis, and interviewed SC Signal’s stakeholders to understand the features users needed most."
+            ],
+            "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">FINDING 1</span><h5>Quick access</h5><p>Users want a VPN connection without complex configuration steps.</p></div><div class=\"card\"><span class=\"n\">FINDING 2</span><h5>Fear of setup</h5><p>Non-technical users find connecting to a VPN intimidating.</p></div><div class=\"card\"><span class=\"n\">FINDING 3</span><h5>Clear status</h5><p>Customers preferred a clear indication of their connection status.</p></div><div class=\"card\"><span class=\"n\">FINDING 4</span><h5>Reassurance</h5><p>Security and privacy were top concerns; people needed to trust the app.</p></div></div>"
+          },
+          {
+            "h": "Competitive analysis",
+            "p": [
+              "I examined similar VPN apps to find best practices and gaps. Popular apps like NordVPN and ExpressVPN showed how to design a clean, straightforward flow on top of powerful backend integrations."
+            ],
+            "html": "<div class=\"chips\"><span class=\"chip\">NordVPN</span><span class=\"chip\">ExpressVPN</span></div><div class=\"grid\"><div class=\"card\"><span class=\"n\">TAKEAWAY</span><h5>Minimal UI</h5><p>Focus on quick connections.</p></div><div class=\"card\"><span class=\"n\">TAKEAWAY</span><h5>Smart servers</h5><p>Simple switching and location-based recommendations.</p></div><div class=\"card\"><span class=\"n\">TAKEAWAY</span><h5>Honest status</h5><p>Clear indicators, with detailed logs for advanced users.</p></div></div>"
+          },
+          {
+            "h": "Ideation and structure",
+            "p": [
+              "I wanted the app to feel lightweight and powerful: easy navigation for non-technical users, with advanced features available to experienced ones."
+            ],
+            "k": "Core features",
+            "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">HOME</span><h5>Dashboard</h5><p>One button to connect or disconnect, a server dropdown and a status indicator showing connection strength and server location.</p></div><div class=\"card\"><span class=\"n\">SERVERS</span><h5>Map or list</h5><p>Pick a server on a map or in a list, with automatic recommendations based on the user's location.</p></div><div class=\"card\"><span class=\"n\">STATUS</span><h5>Visual feedback</h5><p>Clear colour feedback: green for connected, red for disconnected.</p></div><div class=\"card\"><span class=\"n\">AUTH</span><h5>Login with MFA</h5><p>A simple, secure login page with multi-factor authentication to protect privacy.</p></div></div>"
+          },
+          {
+            "h": "User flow",
+            "html": "<div class=\"flow\"><div><b>Onboarding</b><span>Guided setup</span></div><div><b>Login + MFA</b><span>Secure sign-in</span></div><div><b>Home</b><span>Map or list view</span></div><div><b>Choose server</b><span>Quick Connect or pick one</span></div><div><b>Connected</b><span>Status at a glance</span></div></div>"
+          },
+          {
+            "h": "Wireframes",
+            "p": [
+              "I created low-fidelity wireframes to explore layouts for the home screen, server selection flow and settings. They fixed the structure and flow of the app and kept every key feature reachable without overwhelming the user."
+            ],
+            "img": "img/svc-1.jpg",
+            "cap": "Low-fidelity wireframes in Figma: login, map view, list view and profile."
+          },
+          {
+            "h": "Design system and visual style",
+            "p": [
+              "With the wireframes approved, I moved to high-fidelity design. The visual style follows SC Signal’s branding: clean lines, modern typography and subtle animations for smooth transitions. Colour carries meaning, so the palette is built around connection state."
+            ],
+            "html": "<div class=\"sw\"><div><i style=\"background:#2e7644\"></i><span><b>Primary</b>#2E7644</span></div><div><i style=\"background:#004744\"></i><span><b>Forest green</b>#004744</span></div><div><i style=\"background:#209eb5\"></i><span><b>Sea blue</b>#209EB5</span></div><div><i style=\"background:#4e4e4e\"></i><span><b>Dark liver</b>#4E4E4E</span></div><div><i style=\"background:#0d6c32\"></i><span><b>Confirmation</b>#0D6C32</span></div><div><i style=\"background:#f87120\"></i><span><b>Warning</b>#F87120</span></div><div><i style=\"background:#c11515\"></i><span><b>Destructive</b>#C11515</span></div></div><div class=\"states\"><span class=\"st\" style=\"background:#0d6c32\">Connected</span><span class=\"st\" style=\"background:#c11515\">Disconnected</span><span class=\"st\" style=\"background:#f87120\">Error</span></div>"
+          }
+        ]
+      },
+      {
+        "h": "Key design decisions",
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">01</span><h5>Minimalist UI</h5><p>Large, easy-to-read buttons and icons so non-technical users can navigate with ease.</p></div><div class=\"card\"><span class=\"n\">02</span><h5>Colour coding</h5><p>Green for connected, red for disconnected, yellow for error: instant visual feedback.</p></div><div class=\"card\"><span class=\"n\">03</span><h5>Interactive server list</h5><p>For advanced users: server locations, ping times and other details in a compact, scrollable format.</p></div><div class=\"card\"><span class=\"n\">04</span><h5>Guided onboarding</h5><p>A step-by-step setup that helps users configure the app without effort.</p></div></div>"
+      },
+      {
+        "h": "Final screens",
+        "p": [
+          "The final design in four states: the map view, the expanded server list, the searchable list view, and an active connection."
+        ],
+        "img": "img/svc-screens.jpg",
+        "cap": "High-fidelity screens, rebuilt as presentation renders of the Figma design. The connected state follows the colour system above."
+      },
+      {
+        "h": "Prototypes",
+        "p": [
+          "I built interactive prototypes in Figma to demonstrate how the app works. They were shared with stakeholders and users for feedback."
+        ]
+      }
+    ],
+    "note": "The screens are presentation renders of the Figma design. No usage metrics are available for this project."
+  },
+  {
+    "id": "rane",
+    "img": "img/rane-cover.jpg",
+    "title": "RANE Mobile Application",
+    "full": "RANE Mobile Application",
+    "sub": "From email digests to a real-time mobile app",
+    "role": "UI/UX Designer",
+    "scope": "Research, UX, UI, Prototyping",
+    "plat": "Mobile app",
+    "blurb": "Moved email-based content digests into a mobile app with push notifications, search and filtering, and likes, comments and sharing.",
+    "body": [
+      {
+        "h": "Project overview",
+        "p": [
+          "The RANE Networks mobile application aims to provide subscribers with real-time notifications, easy access to curated content, and improved user engagement, reducing reliance on email for digest distribution. The app will enable users to access timely and relevant information directly on their devices while maintaining an intuitive and user-friendly experience."
+        ],
+        "html": "<div class=\"glance\"><div><small>Platform</small><b>Mobile app</b></div><div><small>Client</small><b>RANE Networks</b></div><div><small>Process</small><b>Double Diamond</b></div><div><small>Role</small><b>UI/UX Designer</b></div></div>"
+      },
+      {
+        "h": "Double Diamond design process",
+        "p": [
+          "I followed the Double Diamond process: Discover, Define, Develop and Deliver."
+        ],
+        "html": "<div class=\"flow\"><div><b>Discover</b><span>Understand the problem space and user needs</span></div><div><b>Define</b><span>Turn findings into clear goals</span></div><div><b>Develop</b><span>Ideate, sketch and prototype</span></div><div><b>Deliver</b><span>Finalize the design and launch</span></div></div>"
+      },
+      {
+        "h": "Discover",
+        "p": [
+          "Objective: understand the problem space, user needs, and current pain points. To gain a deep understanding of the problem, we conducted stakeholder meetings. Here is a summary of the findings."
+        ],
+        "subs": [
+          {
+            "h": "Pain points",
+            "ul": null,
+            "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">PAIN POINT</span><h5>Email overload</h5><p>Users find it difficult to keep up with regular email digests. The reliance on email communication leads to delayed access to content, which causes missed engagement opportunities</p></div><div class=\"card\"><span class=\"n\">PAIN POINT</span><h5>Limited interactivity in emails</h5><p>Email as a medium for delivering content doesn’t give users easy ways to engage with the content directly. It lacks interactive features like searching, filtering, or accessing additional content</p></div><div class=\"card\"><span class=\"n\">PAIN POINT</span><h5>Difficult navigation</h5><p>The current system doesn’t provide an efficient way for users to browse and find specific content. Users face challenges when trying to access archived or past content</p></div></div>"
+          },
+          {
+            "h": "User needs",
+            "ul": null,
+            "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">NEED</span><h5>Timely access to content</h5><p>Subscribers need immediate, real-time access to the content, without delays or having to sift through emails</p></div><div class=\"card\"><span class=\"n\">NEED</span><h5>User engagement</h5><p>They want an easy-to-navigate platform where they can interact with the content (for example, liking, sharing, commenting)</p></div><div class=\"card\"><span class=\"n\">NEED</span><h5>Search functionality</h5><p>Users desire an efficient search feature that mimics the existing RANE search experience to allow easy navigation through past digests</p></div></div>"
+          },
+          {
+            "h": "Key takeaways",
+            "p": [
+              "This phase helped us uncover the fundamental pain points, leading us to realize that transitioning away from email-based communication and creating a more interactive, mobile-friendly platform would address the users’ frustrations."
+            ]
+          }
+        ]
+      },
+      {
+        "h": "Define",
+        "p": [
+          "Objective: refine the problem definition and user needs into clear, actionable goals and design criteria."
+        ],
+        "subs": [
+          {
+            "h": "Synthesis",
+            "p": [
+              "Based on the user research, we identified several key goals for the mobile application:"
+            ],
+            "ul": null,
+            "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">GOAL</span><h5>Real-time notifications</h5><p>The app must be able to deliver push notifications for new content or updates</p></div><div class=\"card\"><span class=\"n\">GOAL</span><h5>Curated digest access</h5><p>Users should easily access curated digests, similar to the email format but with a more user-friendly and engaging interface</p></div><div class=\"card\"><span class=\"n\">GOAL</span><h5>Search functionality</h5><p>The search should mirror the current web experience of RANE, allowing users to filter, sort, and search through content effortlessly</p></div><div class=\"card\"><span class=\"n\">GOAL</span><h5>Mobile-first design</h5><p>The app must be designed with a mobile-first approach, ensuring an intuitive experience that fits seamlessly into users’ daily lives</p></div></div>"
+          },
+          {
+            "h": "User personas",
+            "p": [
+              "Based on our findings, we developed several user personas to capture the different types of RANE subscribers and their needs. These personas guided the design decisions to ensure the app would meet the needs of its users."
+            ],
+            "img": "img/rane-persona.jpg",
+            "cap": "Persona: Sarah Patel, Senior Analyst, with her goals and pain points."
+          },
+          {
+            "h": "Problem statement",
+            "p": [
+              "The core problem is the ineffective distribution and access to content through emails, resulting in low engagement and a lack of interactivity. This issue affects how timely and easily users can access updates, diminishing their overall experience with the content."
+            ]
+          }
+        ]
+      },
+      {
+        "h": "Develop",
+        "p": [
+          "Objective: generate ideas, create design solutions, and prototype potential solutions."
+        ],
+        "subs": [
+          {
+            "h": "Ideation",
+            "p": [
+              "We held a brainstorming session to generate a wide variety of ideas for the problem. The objective was to encourage free thinking and explore possibilities without immediately evaluating or judging the ideas."
+            ],
+            "img": "img/rane-ideation.jpg",
+            "cap": "Team brainstorming board: ideas from Pramod, Ditty and Anoop, with votes."
+          },
+          {
+            "h": "Sketches",
+            "p": [
+              "After this process I sketched the ideas into rough drawings, and discussed them with team members, developing new ideas along the way."
+            ],
+            "img": "img/rane-3.jpg",
+            "cap": "Rough sketches of the home, digest, saved list and feedback screens."
+          },
+          {
+            "h": "Wireframes and prototype",
+            "p": [
+              "I then transformed my ideas into an interactive digital low-fidelity prototype and presented it to the stakeholders, our potential users, to gather feedback. I created several wireframes and interactive prototypes that demonstrated key features such as:"
+            ],
+            "ul": null,
+            "img": "img/rane-4.jpg",
+            "cap": "Prototype flows in Figma.",
+            "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">FEATURE</span><h5>Real-time push notifications</h5><p>Users receive timely alerts about newly available content, with the ability to customize preferences</p></div><div class=\"card\"><span class=\"n\">FEATURE</span><h5>A home screen showcasing all briefs, with a search box so users can jump to their relevant searc</h5><p> home screen showcasing all briefs, with a search box so users can jump to their relevant search</p></div><div class=\"card\"><span class=\"n\">FEATURE</span><h5>A detailed view of all digests inside a particular brief, where users can choose a date and see digests from past date</h5><p> detailed view of all digests inside a particular brief, where users can choose a date and see digests from past dates</p></div><div class=\"card\"><span class=\"n\">FEATURE</span><h5>A content interaction module, enabling users to engage with content through likes, comments, or sharin</h5><p> content interaction module, enabling users to engage with content through likes, comments, or sharing</p></div></div>"
+          }
+        ]
+      },
+      {
+        "h": "Delivery",
+        "p": [
+          "Objective: finalize the design, deliver the product, and launch the app."
+        ],
+        "subs": [
+          {
+            "h": "Explore your collection of digests",
+            "p": [
+              "Users can easily navigate through the collection of briefs, and clicking on any brief tab directs them to a new screen displaying all relevant digests for that brief. A date picker is available, allowing users to select and view past digests."
+            ],
+            "img": "img/rane-d1.jpg",
+            "cap": "Brief list and the digest view with a date picker."
+          },
+          {
+            "h": "Review the variety of articles",
+            "p": [
+              "Users can review all the digests and content interaction modules, allowing them to engage with content through likes, comments, and sharing. The design enables easy access to all digests; users can save specific digests to view later."
+            ],
+            "img": "img/rane-d2.jpg",
+            "cap": "Digest feed with like, dislike, share and save actions."
+          },
+          {
+            "h": "Regulate your notifications and brief listing",
+            "p": [
+              "The account settings page provides options to set notifications for specific briefs and to display the brief list on the wall."
+            ],
+            "img": "img/rane-d3.jpg",
+            "cap": "Account settings: show on wall and notification toggles per brief."
+          },
+          {
+            "h": "Personalize your articles and briefs",
+            "p": [
+              "Users can personalize their articles and briefs, allowing them to save their favorite content in one place for easy access."
+            ],
+            "img": "img/rane-d4.jpg",
+            "cap": "My saved list with briefs and articles."
+          }
+        ]
+      }
+    ],
+    "cls": "sc sc-rane"
+  },
+  {
+    "id": "fieldsurvey",
+    "img": "img/fs-0.jpg",
+    "title": "Field Survey Management",
+    "full": "Field Survey Management Application",
+    "sub": "A faster, clearer desktop tool for fire-protection audits",
+    "role": "UI/UX Designer",
+    "scope": "Research, UX, UI, Prototyping",
+    "plat": "Desktop app",
+    "blurb": "Replaced a cluttered legacy audit tool with a Windows desktop app for creating audits and generating recommendations, with a dashboard, audit list and client modules.",
+    "body": [
+      {
+        "h": "Problem",
+        "subs": [
+          {
+            "h": "Project overview",
+            "p": [
+              "Harrington Group is one of the leading fire protection firms in the US and they require a new application to enhance their field survey process, allowing for increased flexibility, mobility, and efficiency."
+            ],
+            "html": "<div class=\"glance\"><div><small>Platform</small><b>Windows desktop</b></div><div><small>Client</small><b>Harrington Group</b></div><div><small>Duration</small><b>1.5 months</b></div><div><small>Role</small><b>UI/UX Designer</b></div></div>"
+          },
+          {
+            "h": "Project goal",
+            "p": [
+              "The scope of the work is to develop a new Windows desktop-based application that will help Harrington Group to add, manage, track and generate recommendations. The report can be generated in document format which can be edited independently outside this application."
+            ]
+          },
+          {
+            "h": "Problem statement",
+            "p": [
+              "Currently they are using an old tool, which makes the user spend more time to create an audit, and the screen suffers from cluttered navigation, poor readability, and a lack of clear visual hierarchy, making it challenging for users to navigate and locate information efficiently."
+            ]
+          }
+        ]
+      },
+      {
+        "h": "Process",
+        "subs": [
+          {
+            "h": "User research",
+            "p": [
+              "After understanding the company’s needs and expectations, I designed an application based on research. I developed sketches and created low-fidelity wireframes. After confirming all functionalities with stakeholders, I incorporated their feedback and refined the wireframe. Subsequently, I created the high-fidelity prototype."
+            ]
+          },
+          {
+            "h": "Define phase: user personas",
+            "p": [
+              "While talking to the stakeholders, who are the primary users of this application, we understood their pain points and incorporated all their feedback into user personas. For example, Alex is a senior audit engineer who has been working here for many years."
+            ],
+            "img": "img/fs-persona.jpg",
+            "cap": "Persona: Alex Johnson, Senior Audit Engineer, with his goals, needs and pain points."
+          },
+          {
+            "h": "User journey",
+            "p": [
+              "I also created a user journey to better illustrate the difficulties users face when they try to create and manage audits and recommendations."
+            ],
+            "img": null,
+            "cap": null,
+            "html": "<figure class=\"fig\"><img src=\"img/fs-journey-1.jpg\" alt=\"Module 1: Audit creation\" loading=\"lazy\"><figcaption>Module 1: Audit creation</figcaption></figure><figure class=\"fig\"><img src=\"img/fs-journey-2.jpg\" alt=\"Module 2: Managing recommendations\" loading=\"lazy\"><figcaption>Module 2: Managing recommendations</figcaption></figure><figure class=\"fig\"><img src=\"img/fs-journey-3.jpg\" alt=\"Module 3: Customizing and saving recommendations\" loading=\"lazy\"><figcaption>Module 3: Customizing and saving recommendations</figcaption></figure><figure class=\"fig\"><img src=\"img/fs-journey-4.jpg\" alt=\"Module 4: Client information and prioritization\" loading=\"lazy\"><figcaption>Module 4: Client information and prioritization</figcaption></figure>"
+          },
+          {
+            "h": "Sketches",
+            "p": [
+              "The process below begins with initial ideas and wireframes, then moves to mockups, and finally to the high-fidelity prototype."
+            ]
+          },
+          {
+            "h": "Wireframes and prototype",
+            "p": [
+              "I then transformed my idea into an interactive digital low-fidelity prototype and presented it to the stakeholders, our potential users, to gather feedback."
+            ],
+            "img": "img/fs-3.jpg",
+            "cap": "Low-fidelity wireframes for the dashboard, audit list, new audit flow and recommendations."
+          }
+        ],
+        "html": "<div class=\"flow\"><div><b>Stakeholder talks</b><span>Needs and expectations</span></div><div><b>Sketches</b><span>Initial ideas</span></div><div><b>Low-fi wireframes</b><span>Confirmed with stakeholders</span></div><div><b>Refine</b><span>Feedback incorporated</span></div><div><b>High-fi prototype</b><span>Final design</span></div></div>"
+      },
+      {
+        "h": "Solution",
+        "p": [
+          "I worked on this project for 1.5 months, starting with discussions with the stakeholders who are the primary users of this application. During these discussions, we identified that the main functions of this application are creating new audits and suggesting recommendations based on specific audit findings."
+        ],
+        "subs": [
+          {
+            "h": "Create a dashboard",
+            "p": [
+              "Created a dashboard to provide easy access to all important information. The visual representation of data ensures users never miss recent updates or pending audits."
+            ],
+            "img": "img/fs-4.jpg",
+            "cap": "Dashboard: KPI cards, status and priority charts, and reviewer updates in one view."
+          },
+          {
+            "h": "Audit list",
+            "p": [
+              "Created a list view for all audits, providing essential information that users can quickly scan. Added a column customization option, allowing users to tailor the view based on their priorities. From this screen, users can create new audits."
+            ],
+            "img": "img/fs-5.jpg",
+            "cap": "Audit list: searchable, filterable table with status badges and column customization."
+          },
+          {
+            "h": "Add, manage, track and generate recommendations",
+            "p": [
+              "In the recommendation module, recommendations are categorized as either recommendation templates or issued recommendations and displayed in a list view. Clicking on a list item reveals the detailed content of that recommendation on the right side of the screen."
+            ],
+            "img": "img/fs-6.jpg",
+            "cap": "Recommendations: templates and issued recommendations, with the selected item previewed on the right."
+          },
+          {
+            "h": "Client-specific information module",
+            "p": [
+              "This module organizes all client-related information. Users can view a list of all clients, their regions, sites, segments, and priorities. Additionally, new data can be added for each of these categories."
+            ],
+            "img": "img/fs-7.jpg",
+            "cap": "Client information: a populated region list, and a guided empty state with a clear next step."
+          }
+        ],
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">MODULE 1</span><h5>Dashboard</h5><p>Easy access to important information and pending audits.</p></div><div class=\"card\"><span class=\"n\">MODULE 2</span><h5>Audit list</h5><p>A scannable list with customizable columns.</p></div><div class=\"card\"><span class=\"n\">MODULE 3</span><h5>Recommendations</h5><p>Templates and issued recommendations with a detail pane.</p></div><div class=\"card\"><span class=\"n\">MODULE 4</span><h5>Client information</h5><p>Clients, regions, sites, segments and priorities.</p></div></div>"
+      },
+      {
+        "h": "Visual refinement",
+        "p": [
+          "After the structure was approved, I refined the visual design of every screen while keeping the layout and the Harrington gold and red brand colours."
+        ],
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">01</span><h5>Clear hierarchy</h5><p>A consistent type scale and spacing put the page title, key numbers and actions first.</p></div><div class=\"card\"><span class=\"n\">02</span><h5>Status you can scan</h5><p>Colour-coded badges for Draft, In progress, Closed and review states, so users read status without reading text.</p></div><div class=\"card\"><span class=\"n\">03</span><h5>Calmer data views</h5><p>One chart palette, labelled legends and a sticky table header with gentle row banding.</p></div><div class=\"card\"><span class=\"n\">04</span><h5>Guided empty states</h5><p>When a client has no data yet, the screen explains why and offers one clear next step.</p></div></div>"
+      },
+      {
+        "h": "What the redesign delivers",
+        "p": [
+          "The redesigned tool gives audit engineers a faster, clearer way to run the audit process:"
+        ],
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">01</span><h5>One clear path to a new audit</h5><p>Audits are created from the audit list in a guided flow, replacing the cluttered navigation of the legacy tool.</p></div><div class=\"card\"><span class=\"n\">02</span><h5>Audits that scan quickly</h5><p>Searchable, filterable list with colour-coded status badges and customizable columns, so users read status without reading text.</p></div><div class=\"card\"><span class=\"n\">03</span><h5>Pending work at a glance</h5><p>The dashboard puts KPI cards, status and priority charts and reviewer updates in one view.</p></div><div class=\"card\"><span class=\"n\">04</span><h5>Reusable recommendations</h5><p>Templates and issued recommendations sit side by side, with the selected item previewed in a detail pane.</p></div><div class=\"card\"><span class=\"n\">05</span><h5>Client context in one place</h5><p>Clients, regions, sites, segments and priorities are organised in one module, with guided empty states when data is missing.</p></div><div class=\"card\"><span class=\"n\">06</span><h5>Reports that stay editable</h5><p>Reports are generated as documents that can be edited independently outside the application.</p></div></div>"
+      }
+    ],
+    "cls": "sc sc-fs"
+  },
+  {
+    "id": "agentiq",
+    "img": "img/aiq-cover.jpg",
+    "title": "Agent Assist",
+    "full": "Conversational Assistant Design: Exploring AI-Aided UX Workflows",
+    "sub": "Exploring AI-aided UX workflows for a call-center tool",
+    "role": "UI/UX Designer",
+    "scope": "UX, UI, AI-aided design",
+    "plat": "Web, AI",
+    "blurb": "Redesigned a tab-based call-center tool into a single compact panel that keeps guidance, customer details, live conversation and AI insights in view, without tab switching.",
+    "body": [
+      {
+        "h": "Project overview",
+        "p": [
+          "The AgentIQ tool is designed to support call center agents during live customer interactions by providing conversation guidance, customer details, and AI-driven insights in real time.",
+          "The earlier version used a tab-based interface with four sections:"
+        ],
+        "ul": [
+          "Intents: conversation guidance and suggested prompts",
+          "Entities: customer data such as name, location, and account info",
+          "Conversation: live transcript of the interaction",
+          "AI: space to query or receive AI insights (for example, call summaries)"
+        ],
+        "after": [
+          "While functional, this layout required frequent tab switching, which slowed agents down and increased cognitive load. The tool is typically displayed as a side panel within a larger CRM or service dashboard, so it must fit into a compact, vertical layout similar to a chatbot window, leaving room for the main screen in the background."
+        ],
+        "html": "<div class=\"glance\"><div><small>Platform</small><b>Web side panel</b></div><div><small>Panel width</small><b>400 to 600px</b></div><div><small>Users</small><b>Call-center agents</b></div><div><small>Role</small><b>UI/UX Designer</b></div></div><div class=\"ba\"><div class=\"bx\"><small>BEFORE</small><div class=\"tabs\"><i class=\"on\">Intents</i><i>Entities</i><i>Conversation</i><i>AI</i></div><div class=\"blk\">One section visible at a time</div></div><div class=\"bx\"><small>AFTER</small><div class=\"blk g\">Guidance</div><div class=\"blk g\">Conversation</div><div class=\"row2\"><div class=\"blk\">Customer details</div><div class=\"blk\">AI insights</div></div></div></div>"
+      },
+      {
+        "h": "Problem",
+        "p": [
+          "Agents faced three core issues:"
+        ],
+        "ul": null,
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">PROBLEM</span><h5>Too much navigation</h5><p>Constant switching between tabs during live calls</p></div><div class=\"card\"><span class=\"n\">PROBLEM</span><h5>Fragmented information</h5><p>Important details scattered across sections</p></div><div class=\"card\"><span class=\"n\">PROBLEM</span><h5>Limited workspace</h5><p>The tool shares screen space with another primary application, requiring a compact design</p></div></div>"
+      },
+      {
+        "h": "Goal",
+        "p": [
+          "Redesign the AgentIQ interface into a single, unified panel (chatbot-sized or slightly larger) that integrates all essential information (guidance prompts, customer details, live conversation, and AI insights) without tabs.",
+          "This will create a seamless experience where agents can quickly reference everything in one view while still keeping the main screen visible."
+        ]
+      },
+      {
+        "h": "Design constraints",
+        "ul": [
+          "Must fit within a sidebar or half-screen view (approx. width of 400 to 600px)",
+          "Should not obscure the main application screen behind it",
+          "Must still present all four information types in a scannable, readable way",
+          "Needs clear visual hierarchy, possibly collapsible or expandable sections"
+        ]
+      },
+      {
+        "h": "Design objectives",
+        "ul": null,
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">OBJECTIVE</span><h5>Unified interface</h5><p>Eliminate tab switching</p></div><div class=\"card\"><span class=\"n\">OBJECTIVE</span><h5>Compact but informative</h5><p>Prioritize layout density while maintaining clarity</p></div><div class=\"card\"><span class=\"n\">OBJECTIVE</span><h5>Context visibility</h5><p>Keep essential call data on-screen at all times</p></div><div class=\"card\"><span class=\"n\">OBJECTIVE</span><h5>AI integration</h5><p>Allow inline AI responses and insights</p></div><div class=\"card\"><span class=\"n\">OBJECTIVE</span><h5>Visual balance</h5><p>Ensure the panel feels part of a larger workspace</p></div></div>"
+      },
+      {
+        "h": "Design approach",
+        "ul": [
+          "Information grouping: stack related content (for example, intents with conversation, and customer details with AI insights side by side)",
+          "Progressive disclosure: use collapsible panels or hover reveals to save space",
+          "AI assistance: use AI tools to ideate compact, modular layouts"
+        ],
+        "mid": [
+          "Design tools used:"
+        ],
+        "ul2": [
+          "Figma AI for layout and spacing refinement",
+          "ChatGPT and Claude for UX writing and hierarchy decisions",
+          "Midjourney and DALL·E for visual mockup inspiration"
+        ]
+      },
+      {
+        "h": "Final concept",
+        "p": [
+          "A compact AgentIQ panel that:"
+        ],
+        "ul": [
+          "Shows agent guidance and the conversation stream as the main focus",
+          "Displays customer details and AI summaries in a collapsible side or bottom section",
+          "Maintains clear visibility of the CRM or main tool behind it",
+          "Provides a responsive, modular design adaptable for narrow or wide panels"
+        ],
+        "img": "img/aiq-concept.jpg",
+        "cap": "The unified AgentIQ panel in three states: conversation in focus, customer details expanded, AI insights expanded."
+      },
+      {
+        "h": "Impact",
+        "ul": null,
+        "html": "<div class=\"grid\"><div class=\"card\"><span class=\"n\">01</span><p>Faster response time due to reduced tab navigation</p></div><div class=\"card\"><span class=\"n\">02</span><p>Better situational awareness: agents see context and conversation at once</p></div><div class=\"card\"><span class=\"n\">03</span><p>Improved multitasking: the design works seamlessly as an overlay or side panel</p></div></div>"
+      }
+    ],
+    "cls": "sc sc-aiq"
+  }
+];
+
+  var $ = function (s) { return document.querySelector(s); };
+  var esc = function (s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); };
+  var ul = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; };
+  var ps = function (a) { return (a || []).map(function (x) { return '<p>' + esc(x) + '</p>'; }).join(''); };
+
+  // home: mosaic + project rows
+  $('#mosaic').innerHTML = P.map(function (p) {
+    return '<button type="button" data-open="' + p.id + '" aria-label="Open ' + esc(p.title) + '"><img src="' + p.img + '" alt="' + esc(p.title) + ' cover" loading="lazy"></button>';
+  }).join('');
+  $('#work').innerHTML = P.map(function (p) {
+    return '<article class="proj"><div><h2>' + esc(p.title) + '</h2><div class="sub">' + esc(p.sub) + '</div><p>' + esc(p.blurb) + '</p>' +
+      '<dl class="facts"><dt>Role</dt><dd>' + esc(p.role) + '</dd><dt>Scope</dt><dd>' + esc(p.scope) + '</dd><dt>Type</dt><dd>' + esc(p.plat) + '</dd></dl>' +
+      '<button class="pill" type="button" data-open="' + p.id + '">View case study ↗</button></div>' +
+      '<button class="shot" type="button" data-open="' + p.id + '" aria-label="Open ' + esc(p.title) + '"><img src="' + p.img + '" alt="" loading="lazy"></button></article>';
+  }).join('');
+
+  var fig = function (o) { return o.img ? '<figure class="fig"><img src="' + o.img + '" alt="' + esc(o.cap || '') + '" loading="lazy">' + (o.cap ? '<figcaption>' + esc(o.cap) + '</figcaption>' : '') + '</figure>' : ''; };
+
+  function study(id) {
+    var i = P.findIndex(function (p) { return p.id === id; }), p = P[i];
+    var n = P[(i + 1) % P.length];
+    var h = (p.cls ? '<div class="' + p.cls + '">' : '') + '<button class="back" type="button" data-home>← All work</button><h1>' + esc(p.full) + '</h1><p class="lead">' + esc(p.sub) + '</p>' +
+      '<dl class="facts"><dt>Role</dt><dd>' + esc(p.role) + '</dd><dt>Scope</dt><dd>' + esc(p.scope) + '</dd><dt>Type</dt><dd>' + esc(p.plat) + '</dd></dl>' +
+      '<div class="cover"><img src="' + p.img + '" alt="' + esc(p.title) + '"></div>';
+    p.body.forEach(function (s) {
+      h += (s.h ? '<h2>' + esc(s.h) + '</h2>' : '') + ps(s.p) + (s.ul ? ul(s.ul) : '') + ps(s.mid) + (s.ul2 ? ul(s.ul2) : '') + ps(s.after) + (s.html || '') + fig(s);
+      (s.subs || []).forEach(function (b) {
+        h += (b.h ? '<h3>' + esc(b.h) + '</h3>' : '') + ps(b.p) + (b.k ? '<h4>' + esc(b.k) + '</h4>' : '') + (b.ul ? ul(b.ul) : '') + (b.html || '') + fig(b);
+      });
+    });
+    if (p.note) h += '<p class="note">' + esc(p.note) + '</p>';
+    h += '<div class="next"><button class="pill" type="button" data-home>← All work</button><button class="pill" type="button" data-open="' + n.id + '">Next: ' + esc(n.title) + ' →</button></div>';
+    if (p.cls) h += '</div>';
+    $('#study').innerHTML = h;
+  }
+
+  function route() {
+    var m = /^#\/p\/(\w+)/.exec(location.hash), p = m && P.filter(function (x) { return x.id === m[1]; })[0];
+    $('#home').hidden = !!p; $('#study').hidden = !p;
+    if (p) { study(p.id); document.title = p.title + ' | Ditty Dixon'; } else { document.title = 'Ditty Dixon | Senior UI/UX Designer'; }
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  document.addEventListener('click', function (e) {
+    var o = e.target.closest('[data-open]'), hm = e.target.closest('[data-home]'), g = e.target.closest('[data-go]');
+    if (o) { e.preventDefault(); location.hash = '#/p/' + o.getAttribute('data-open'); }
+    else if (hm) { e.preventDefault(); location.hash = '#/'; }
+    else if (g) {
+      e.preventDefault();
+      var go = function () { var t = document.getElementById(g.getAttribute('data-go')); if (t) t.scrollIntoView({ behavior: 'smooth' }); else window.scrollTo(0, 0); };
+      if (location.hash !== '#/' && location.hash !== '') { location.hash = '#/'; setTimeout(go, 60); } else go();
+    }
+  });
+  route();
+
+  // theme toggle (per-viewer convenience, storage optional)
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('theme'); if (t) root.setAttribute('data-theme', t); } catch (e) {}
+  $('#theme').addEventListener('click', function () {
+    var dark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark'; root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // copy email
+  var btn = $('#copy'), el = $('#email');
+  btn.addEventListener('click', function () {
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1800); };
+    var sel = function () { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Press copy'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(el.textContent).then(done, sel); else sel();
+  });
+})();
+
+  // lightbox: click any case-study image to enlarge
+  var lb = document.getElementById('lb'), lbImg = lb.querySelector('.stage img'), lbCap = lb.querySelector('.cap'), lbCt = lb.querySelector('.ct'), lbList = [], lbI = 0, lbFocus = null;
+  function lbShow(k) {
+    lbI = (k + lbList.length) % lbList.length; var im = lbList[lbI];
+    lb.classList.remove('zoom'); lbImg.src = im.currentSrc || im.src;
+    var f = im.closest('figure'), c = f && f.querySelector('figcaption');
+    lbCap.textContent = c ? c.textContent : ''; lbImg.alt = im.alt || '';
+    lbCt.textContent = lbList.length > 1 ? (lbI + 1) + ' / ' + lbList.length : '';
+    lb.querySelector('.pv').style.display = lb.querySelector('.nx').style.display = lbList.length > 1 ? '' : 'none';
+  }
+  function lbOpen(im) {
+    lbList = [].slice.call(document.querySelectorAll('#study img')); lbFocus = document.activeElement;
+    lb.hidden = false; lb.classList.add('on'); document.body.style.overflow = 'hidden';
+    lbShow(lbList.indexOf(im)); lb.querySelector('.x').focus();
+  }
+  function lbClose() { lb.classList.remove('on', 'zoom'); lb.hidden = true; document.body.style.overflow = ''; if (lbFocus && lbFocus.focus) try { lbFocus.focus(); } catch (e) {} }
+  document.addEventListener('click', function (e) {
+    var im = e.target.closest && e.target.closest('#study img');
+    if (im) { e.preventDefault(); lbOpen(im); return; }
+    if (!lb.classList.contains('on')) return;
+    if (e.target.closest('.x') || e.target === lb || e.target.classList.contains('stage')) lbClose();
+    else if (e.target.closest('.pv')) lbShow(lbI - 1);
+    else if (e.target.closest('.nx')) lbShow(lbI + 1);
+    else if (e.target === lbImg) lb.classList.toggle('zoom');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('on')) return;
+    if (e.key === 'Escape') lbClose(); else if (e.key === 'ArrowLeft') lbShow(lbI - 1); else if (e.key === 'ArrowRight') lbShow(lbI + 1);
+    else if (e.key === 'Tab') { var b = [].slice.call(lb.querySelectorAll('button')).filter(function (x) { return x.style.display !== 'none'; }); var a = b.indexOf(document.activeElement); e.preventDefault(); b[(a + (e.shiftKey ? -1 : 1) + b.length) % b.length].focus(); }
+  });
+  window.addEventListener('hashchange', function () { if (lb.classList.contains('on')) lbClose(); });
+</script>
